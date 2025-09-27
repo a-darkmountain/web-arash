@@ -1,0 +1,450 @@
+/* ===========================
+   style.css
+   نسخه: 2.0
+   توضیحات: استایل کامل سایت شخصی آرش
+   همه‌ی کامنت‌ها فارسی هستند تا راحت متوجه بشی
+   =========================== */
+
+/* ---------------------------
+   تنظیمات پایه (ریست ساده)
+   --------------------------- */
+* {
+  margin: 0;               /* حذف فاصله پیش‌فرض مرورگر */
+  padding: 0;              /* حذف padding پیش‌فرض */
+  box-sizing: border-box;  /* مدل جعبه‌ای بهتر برای محاسبات اندازه */
+  scroll-behavior: smooth; /* اسکرول نرم برای لینک‌های داخلی */
+}
+
+/* ---------------------------
+   بدنه صفحه
+   --------------------------- */
+body {
+  font-family: 'Samim', sans-serif;     /* فونت اصلی فارسی */
+  background-color: #000;               /* پس‌زمینه پایه */
+  color: #cce6ff;                       /* رنگ پیش‌فرض متن (آبی روشن) */
+  line-height: 1.6;                     /* ارتفاع خطوط خوانا */
+  min-height: 100vh;                    /* حداقل ارتفاع صفحه برابر با نمای کاربر */
+  overflow-x: hidden;                   /* جلوگیری از اسکرول افقی ناخواسته */
+  position: relative;
+}
+
+/* ---------------------------
+   بک‌گراند تار (تصویر پشت سایت)
+   این div .background-overlay در HTML قرار دارد
+   --------------------------- */
+.background-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-image: url("assets/Background-site.png"); /* مسیر تصویر پس‌زمینه */
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px) brightness(0.70rem); /* تار و تیره کردن تصویر */
+  z-index: -1; /* زیر همه چیز قرار بگیرد */
+}
+
+/* ============================
+   هدر — لوگوی وسطی و منو
+   ============================ */
+header {
+  position: sticky; /* استیکی شدن هدر بالای صفحه */
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(6px) saturate(120%); /* فیلتر شیشه‌ای */
+  background: linear-gradient(180deg, rgba(0,0,0,0.26), rgba(0,0,0,0.18));
+  padding: 0.8rem 1.2rem;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* داخل هدر ما یک nav > ul داریم که h1 داخل همان ul قرار گرفته */
+header nav {
+  display: flex;
+  justify-content: center; /* محتوای منو وسط‌چین کلی */
+  align-items: center;
+}
+
+/* لیست لینک‌های هدر (flex برای چینش کنار هم) */
+header nav ul {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  list-style: none;
+}
+
+/* استایل لینک‌ها */
+header nav ul li a {
+  color: #f1f1f1;            /* رنگ متن آبی روشن */
+  text-decoration: none;     /* حذف زیرخط لینک */
+  font-weight: 600;
+  font-size: 22px;
+  padding: 0.25rem 0.4rem;
+  transition: color 200ms ease, transform 160ms ease;
+}
+
+header nav ul li a:hover {
+  color: #ff9999;
+  transform: translateY(-2px);
+}
+
+/* لوگوی متنی وسط هدر — عنصر h1 داخل ul */
+header nav ul h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.9rem;
+  color: #9c0505 ;
+  font-weight: 800;
+  padding: 0.15rem 0.8rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35) inset;
+  margin: 0 0.25rem;
+  /* لوگو را کمی برجسته نشان می‌دهیم */
+}
+
+/* همبرگر (موبایل) */
+.hamburger {
+  display: none; /* پیش‌فرض دسکتاپ مخفی است */
+  position: absolute;
+  left: 18px; /* توی طرح خواستی که همبرگر سمت چپ باشه */
+  top: 14px;
+  z-index: 1100;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+}
+
+.hamburger div {
+  width: 24px;
+  height: 3px;
+  background-color: #cce6ff;
+  border-radius: 3px;
+}
+
+/* ============================
+   سکشن‌ها (عمومی)
+   ============================ */
+section {
+  padding: 3.6rem 1.2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* عناوین سکشن */
+section h1, section h2 {
+  color: #ffffffbc;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* ============================
+   بخش درباره من
+   ============================ */
+#about {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: justify; /* متن راست‌چین به‌خاطر زبان فارسی */
+}
+
+/* تصویر درباره من (SVG یا PNG) */
+.about-img {
+  width: 400px;
+  max-width: 90%;
+  border-radius: 16px;
+  flex-shrink: 0;
+  filter: grayscale(6%) brightness(0.96);
+}
+
+/* متن درباره من */
+.about-text {
+  max-width: 620px;
+  color:  #f1f1f1bb;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+
+/* ----------------------------
+   فاصله بین بخش‌ها (اختیاری)
+   ---------------------------- */
+#about + #skills {
+  margin-top: 1.6rem;
+}
+
+/* ============================
+   بخش مهارت‌ها — کارت‌ها (مهارت‌ها جداگانه)
+   ============================ */
+#skills {
+  background: rgba(0,0,0,0.12);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgb(0, 0, 0);
+}
+
+/* کارت کلی هر مهارت */
+.skill {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+  border: 1px solid rgba(140,200,255,0.04);
+  box-shadow: 0 8px 20px rgba(76, 72, 72, 0.205);
+}
+
+/* هاور کوچک روی کارت مهارت */
+.skill:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(40, 0, 0, 0.64);
+}
+
+/* آیکون/SVG مهارت‌ها */
+.skill img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* متن مهارت */
+.skill > div h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+  color: #9c0505;
+   text-align: right;
+}
+.skill > div p {
+  color: #f1f1f1;
+  line-height: 1.6;
+  font-size: 0.98rem;
+   text-align: right;
+}
+
+/* ============================
+   بخش نمونه‌کارها (پروژه‌ها)
+   سه کارت در یک ردیف در دسکتاپ
+   ============================ */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+/* کارت پروژه (لینک کامل) */
+.project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.12);
+  padding: 0.6rem;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  border: 1px solid rgba(140,200,255,0.04);
+}
+
+/* تصویر داخل کارت پروژه */
+.project-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  filter: grayscale(100%) contrast(85%); /* حالت اولیه سیاه‌سفید */
+  transition: filter 400ms ease, transform 300ms ease;
+  
+}
+
+/* وقتی موس روی کارت است — عکس رنگی و کمی بزرگ‌تر */
+.project-card:hover img {
+  filter: none; /* رنگی می‌شود */
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* عنوان پروژه */
+.project-card h3 {
+  margin-top: 0.7rem;
+  text-align: center;
+  color: #9c0505;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ============================
+   بخش ارتباط با من (شرح کارت‌ها)
+   ============================ */
+.contact-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* کارت تماس */
+.contact-card {
+  background: rgba(0,0,0,0.12);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(66, 66, 66, 0.45);
+  text-align: center;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  border: 1px solid rgba(140,200,255,0.04);
+}
+
+/* هنگام هاور کارت تماس */
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(101, 100, 100, 0.6);
+}
+
+/* عنوان داخل کارت تماس */
+.contact-card h3 {
+  color: #823737c7;
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+/* لینک داخل کارت تماس */
+.contact-card a {
+  display: inline-block;
+  color: #ffffffcb;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+   /* بخش ارتباط با من */
+.contact-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 2rem;
+}
+#text{
+  text-align: center;
+}
+
+/* ============================
+   فوتر
+   ============================ */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: #ffffff;
+  background: transparent;
+  border-radius: 10px 10px 0 0;
+  margin-top: 2rem;
+}
+
+/* ============================
+   اسکرول بار سفارشی (WebKit)
+   ============================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #380000;
+  border-radius: 6px;
+}
+
+/* ============================
+   حالت رسپانسیو (موبایل)
+   ============================ */
+@media (max-width: 992px) {
+  .projects-container {
+    grid-template-columns: repeat(2, 1fr); /* دو کارت در هر ردیف */
+  }
+
+  .project-card img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* منو موبایل: مخفی کردن لیست افقی و نمایش همبرگر */
+  header nav ul {
+    display: none; /* مخفی در حالت موبایل؛ با کلیک همبرگر کلاس show اضافه می‌شود */
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 18px; /* خواستی منو سمت چپ باز شود */
+    background: rgba(0,0,0,0.6);
+    padding: 0.9rem;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+    width: min(86vw, 360px);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    z-index: 1050;
+  }
+
+  /* وقتی کلاس show وجود دارد، منو نمایش داده شود */
+  header nav ul.show {
+    display: flex;
+  }
+
+  /* نمایش همبرگر */
+  .hamburger {
+    display: flex;
+  }
+
+  /* هدر: محتوا را طوری بچین که وسط لوگو حفظ شود */
+  header nav {
+    justify-content: center;
+  }
+
+  /* ساختار درباره من ستون‌شده */
+  #about {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text {
+    max-width: 100%;
+  }
+
+  /* مهارت‌ها کارت به صورت ستونی */
+  .skill {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .skill img {
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* پروژه‌ها یک‌ستونه در موبایل */
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card img {
+    height: 240px;
+  }
+
+  /* تنظیمات هدر کوچک‌تر در موبایل */
+  header nav ul h1 {
+    font-size: 1.6rem;
+  }
+}
+
+.skill-text {
+  text-align: right; /* ✅ متن‌ها راست‌چین بشن */
+}
+
+/* ============================
+   نکته‌های تکمیلی (مفید)
+   - از SVG های بهینه (فایل‌های کوچک) استفاده کن.
+   - مسیر تصاویر و SVG ها را با پوشه‌های پروژه‌ات هم‌خوان کن.
+   - اگر خواستی، می‌تونم نسخه‌ای از SVG بازارهای مالی و امنیت رو برات بسازم.
+   ============================ */
